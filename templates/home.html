@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block page %}
+
+  <div class="page">
+    {% for message in get_flashed_messages() %}
+      <div class="flash-msg">{{ message }}</div>
+    {% endfor %}
+
+    <h1 class="title"> Pets <h1>
+
+    <div class="row gx-6 pet-list">
+      {% for pet in pets %}
+        <div class="col-4">
+          <div class="card">
+            <a href="/{{pet.id}}"> <img src="{{pet.image_url}}" class="card-img-top" alt="..."> </a>
+            <div class="card-body">
+              <a href="/{{pet.id}}"> <h3 class="card-text">{{pet.name}}</h3> </a>
+              <p class="card-text">{{pet.species}}</p>
+              <p class="card-text">Age: {{pet.age}}</p>
+              <p class="card-text">Notes: {{pet.notes}}</p>
+              {% if pet.available %}
+                <p class="card-text available">Available</p>
+              {% else %}
+                <p class="card-text unavailable">Unvailable</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <a href="/add" class="btn btn-primary">Add a Pet</a>
+  </div>
+
+{% endblock %}
